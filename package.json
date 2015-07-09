@@ -6,7 +6,16 @@
   "keywords": [
     "encryption",
     "decryption",
-    "transform"
+    "transform",
+    "Caesar",
+    "Vigenere",
+    "MD5",
+    "SHA1",
+    "SHA-1",
+    "SHA256",
+    "SHA-256",
+    "AES",
+    "DES",
   ],
   "activationCommands": {
     "atom-text-editor": [
