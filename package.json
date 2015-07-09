@@ -15,7 +15,7 @@
     "SHA256",
     "SHA-256",
     "AES",
-    "DES",
+    "DES"
   ],
   "activationCommands": {
     "atom-text-editor": [
