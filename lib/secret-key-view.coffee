@@ -1,7 +1,8 @@
 module.exports =
-class VigenereView
+class SecretKeyView
   constructor: () ->
     @encrypt = true
+    @algo = 'vigenere'
 
     # Create root element
     @element = document.createElement('div')
@@ -9,7 +10,7 @@ class VigenereView
 
     # Create message element
     message = document.createElement('div')
-    message.textContent = "Enter the Encryption/Decryption Key for Vigenere (It should only be character from A-Z or a-z)"
+    message.textContent = "Enter the Encryption/Decryption Key (It should only be character)"
     message.classList.add('message')
     @element.appendChild(message)
 
@@ -45,3 +46,9 @@ class VigenereView
 
   getEncrypt: ->
     @encrypt
+
+  setAlgo:(theAlgo) ->
+    @algo = theAlgo
+
+  getAlgo: ->
+    @algo

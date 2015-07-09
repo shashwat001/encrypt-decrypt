@@ -18,7 +18,14 @@
       "encrypt-decrypt:encrypt-caesar",
       "encrypt-decrypt:decrypt-caesar",
       "encrypt-decrypt:encrypt-vigenere",
-      "encrypt-decrypt:decrypt-vigenere"
+      "encrypt-decrypt:decrypt-vigenere",
+      "encrypt-decrypt:encrypt-aes",
+      "encrypt-decrypt:decrypt-aes",
+      "encrypt-decrypt:encrypt-des",
+      "encrypt-decrypt:decrypt-des",
+      "encrypt-decrypt:encrypt-md5",
+      "encrypt-decrypt:encrypt-sha1",
+      "encrypt-decrypt:encrypt-sha256"
     ]
   },
   "repository": "https://github.com/lucbu/encrypt-decrypt",
@@ -26,5 +33,7 @@
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "cryptojs-atom": "^2.5.3"
+  }
 }
