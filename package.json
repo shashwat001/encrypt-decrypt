@@ -1,21 +1,20 @@
 {
   "name": "encrypt-decrypt",
   "main": "./lib/encrypt-decrypt",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Encrypt and decrypt strings easily and others functionalities.",
-  "keywords": [
-  ],
+  "keywords": [],
   "activationCommands": {
     "atom-text-editor": [
-        "encrypt-decrypt:frequency-analysis",
-        "encrypt-decrypt:transform-charToCode",
-        "encrypt-decrypt:transform-codeToChar",
-        "encrypt-decrypt:transform-toUpperCase",
-        "encrypt-decrypt:transform-toLowerCase",
-        "encrypt-decrypt:encrypt-caesar",
-        "encrypt-decrypt:decrypt-caesar",
-        "encrypt-decrypt:encrypt-vigenere",
-        "encrypt-decrypt:decrypt-vigenere"
+      "encrypt-decrypt:frequency-analysis",
+      "encrypt-decrypt:transform-charToCode",
+      "encrypt-decrypt:transform-codeToChar",
+      "encrypt-decrypt:transform-toUpperCase",
+      "encrypt-decrypt:transform-toLowerCase",
+      "encrypt-decrypt:encrypt-caesar",
+      "encrypt-decrypt:decrypt-caesar",
+      "encrypt-decrypt:encrypt-vigenere",
+      "encrypt-decrypt:decrypt-vigenere"
     ]
   },
   "repository": "https://github.com/lucbu/encrypt-decrypt",
@@ -23,6 +22,5 @@
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
