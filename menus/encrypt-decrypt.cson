@@ -1,0 +1,54 @@
+# See https://atom.io/docs/latest/hacking-atom-package-word-count#menus for more details
+'context-menu':
+  'atom-text-editor': [
+    {
+      'label': 'Toggle encrypt-decrypt'
+      'command': 'encrypt-decrypt:encrypt-shift'
+    }
+  ]
+'menu': [
+  {
+    'label': 'Packages'
+    'submenu': [
+      'label': 'encrypt-decrypt'
+      'submenu': [
+        {
+          'label': 'frequency analysis'
+          'command': 'encrypt-decrypt:frequency-analysis'
+        },
+        {
+            'label': 'transform charToCode'
+            'command': 'encrypt-decrypt:transform-charToCode'
+        },
+        {
+            'label': 'transform codeToChar'
+            'command': 'encrypt-decrypt:transform-codeToChar'
+        },
+        {
+            'label': 'transform toUpperCase'
+            'command': 'encrypt-decrypt:transform-toUpperCase'
+        },
+        {
+            'label': 'transform toLowerCase'
+            'command': 'encrypt-decrypt:transform-toLowerCase'
+        },
+        {
+            'label': 'encrypt caesar'
+            'command': 'encrypt-decrypt:encrypt-caesar'
+        },
+        {
+          'label': 'decrypt caesar'
+          'command': 'encrypt-decrypt:decrypt-caesar'
+        },
+        {
+          'label': 'encrypt vigenere'
+          'command': 'encrypt-decrypt:encrypt-vigenere'
+        },
+        {
+          'label': 'decrypt vigenere'
+          'command': 'encrypt-decrypt:decrypt-vigenere'
+        }
+      ]
+    ]
+  }
+]
