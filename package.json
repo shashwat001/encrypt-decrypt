@@ -3,7 +3,7 @@
   "main": "./lib/encrypt-decrypt",
   "version": "0.1.0",
   "description": "Encrypt and decrypt strings easily and others functionalities.",
-  "keywords": [],
+  "keywords": ["encryption", "decryption", "transform"],
   "activationCommands": {
     "atom-text-editor": [
       "encrypt-decrypt:frequency-analysis",
