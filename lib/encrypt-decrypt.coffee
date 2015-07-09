@@ -1,10 +1,12 @@
-vigenereView = require './vigenere-view'
+secretKeyView = require './secret-key-view'
+
+crypto = (require '../node_modules/cryptojs-atom/cryptojs').Crypto
 
 module.exports =
 
   activate: (state) ->
-    @vigenereView = new vigenereView(state.vigenereViewState)
-    @vigenerePanel = atom.workspace.addModalPanel(item: @vigenereView.getElement(), visible: false)
+    @secretKeyView = new secretKeyView(state.secretKeyViewState)
+    @secretkeyPanel = atom.workspace.addModalPanel(item: @secretKeyView.getElement(), visible: false)
 
     ### Frequency Analysis ###
     atom.commands.add 'atom-text-editor', 'encrypt-decrypt:frequency-analysis': => @frequencyanalysis()
@@ -23,9 +25,21 @@ module.exports =
     ### Vigenere ###
     atom.commands.add 'atom-text-editor', 'encrypt-decrypt:encrypt-vigenere': => @encryptvigenere()
     atom.commands.add 'atom-text-editor', 'encrypt-decrypt:decrypt-vigenere': => @decryptvigenere()
+    ### AES ###
+    atom.commands.add 'atom-text-editor', 'encrypt-decrypt:encrypt-aes': => @encryptaes()
+    atom.commands.add 'atom-text-editor', 'encrypt-decrypt:decrypt-aes': => @decryptaes()
+    ### DES ###
+    atom.commands.add 'atom-text-editor', 'encrypt-decrypt:encrypt-des': => @encryptdes()
+    atom.commands.add 'atom-text-editor', 'encrypt-decrypt:decrypt-des': => @decryptdes()
     ### Set event on "Go" button ###
-    submit = @vigenereView.getSubmit()
-    submit.addEventListener "click", (e) => @vigenereFromInput()
+    submit = @secretKeyView.getSubmit()
+    submit.addEventListener "click", (e) => @submitKey()
+
+    ### HASH ###
+    atom.commands.add 'atom-text-editor', 'encrypt-decrypt:encrypt-md5': => @encryptmd5()
+    atom.commands.add 'atom-text-editor', 'encrypt-decrypt:encrypt-sha1': => @encryptsha1()
+    atom.commands.add 'atom-text-editor', 'encrypt-decrypt:encrypt-sha256': => @encryptsha256()
+
 
   getTextSelected: ->
     @editor = atom.workspace.getActiveTextEditor()
@@ -101,9 +115,17 @@ module.exports =
   decryptcaesar: ->
     @encryptshift(3, false)
 
+  submitKey: ->
+    @secretkeyPanel.hide()
+    algo = @secretKeyView.getAlgo()
+    switch algo
+      when "vigenere" then @vigenereFromInput()
+      when "aes" then @aesFromInput()
+      when "des" then @desFromInput()
+    @pane.activate()
+
   vigenereFromInput: ->
-    @vigenerePanel.hide()
-    @vigenere(@vigenereView.getInput().value, @vigenereView.getEncrypt())
+    @vigenere(@secretKeyView.getInput().value, @secretKeyView.getEncrypt())
 
   vigenere:(key, encrypt) ->
     if(key.length == 0)
@@ -153,14 +175,76 @@ module.exports =
         else
             encryptedText += char
     @replaceText(encryptedText, {'select': true})
-    @pane.activate()
 
   encryptvigenere: ->
     @pane = atom.workspace.getActivePane()
-    @vigenereView.setEncrypt(true)
-    @vigenerePanel.show()
+    @secretKeyView.setEncrypt(true)
+    @secretKeyView.setAlgo('vigenere')
+    @secretkeyPanel.show()
 
   decryptvigenere: ->
     @pane = atom.workspace.getActivePane()
-    @vigenereView.setEncrypt(false)
-    @vigenerePanel.show()
+    @secretKeyView.setEncrypt(false)
+    @secretKeyView.setAlgo('vigenere')
+    @secretkeyPanel.show()
+
+  aesFromInput: ->
+    @aes(@secretKeyView.getInput().value, @secretKeyView.getEncrypt())
+
+  aes:(key, encrypt) ->
+    text = @getTextSelected()
+    if(encrypt)
+      encryptedText = crypto.AES.encrypt(text, key)
+    else
+      encryptedText = crypto.AES.decrypt(text, key)
+    @replaceText(encryptedText, {'select': true})
+
+  encryptaes: ->
+    @pane = atom.workspace.getActivePane()
+    @secretKeyView.setEncrypt(true)
+    @secretKeyView.setAlgo('aes')
+    @secretkeyPanel.show()
+
+  decryptaes: ->
+    @pane = atom.workspace.getActivePane()
+    @secretKeyView.setEncrypt(false)
+    @secretKeyView.setAlgo('aes')
+    @secretkeyPanel.show()
+
+  desFromInput: ->
+    @des(@secretKeyView.getInput().value, @secretKeyView.getEncrypt())
+
+  des:(key, encrypt) ->
+    text = @getTextSelected()
+    if(encrypt)
+      encryptedText = crypto.DES.encrypt(text, key)
+    else
+      encryptedText = crypto.DES.decrypt(text, key)
+    @replaceText(encryptedText, {'select': true})
+
+  encryptdes: ->
+    @pane = atom.workspace.getActivePane()
+    @secretKeyView.setEncrypt(true)
+    @secretKeyView.setAlgo('des')
+    @secretkeyPanel.show()
+
+  decryptdes: ->
+    @pane = atom.workspace.getActivePane()
+    @secretKeyView.setEncrypt(false)
+    @secretKeyView.setAlgo('des')
+    @secretkeyPanel.show()
+
+  encryptmd5: ->
+    text = @getTextSelected()
+    hash = crypto.MD5(text)
+    @replaceText(hash, {'select': true})
+
+  encryptsha1: ->
+    text = @getTextSelected()
+    hash = crypto.SHA1(text)
+    @replaceText(hash, {'select': true})
+
+  encryptsha256: ->
+    text = @getTextSelected()
+    hash = crypto.SHA256(text)
+    @replaceText(hash, {'select': true})
