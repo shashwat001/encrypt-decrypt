@@ -14,16 +14,20 @@ class SecretKeyView
     message.classList.add('message')
     @element.appendChild(message)
 
+    @form = document.createElement('form')
+
     @input = document.createElement('input')
     @input.type = "text"
     @input.size='35'
     @input.placeholder = "Encryption/Decryption Key"
-    @element.appendChild(@input)
+    @form.appendChild(@input)
 
-    @submit = document.createElement('input')
-    @submit.type = "submit"
-    @submit.value = "Go !"
-    @element.appendChild(@submit)
+    submit = document.createElement('input')
+    submit.type = "submit"
+    submit.value = "Go !"
+    @form.appendChild(submit)
+
+    @element.appendChild(@form);
 
   # Returns an object that can be retrieved when package is activated
   serialize: ->
@@ -38,8 +42,8 @@ class SecretKeyView
   getInput: ->
     @input
 
-  getSubmit: ->
-    @submit
+  getForm: ->
+    @form
 
   setEncrypt:(isEncrypt) ->
     @encrypt = isEncrypt

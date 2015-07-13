@@ -31,9 +31,9 @@ module.exports =
     ### DES ###
     atom.commands.add 'atom-text-editor', 'encrypt-decrypt:encrypt-des': => @encryptdes()
     atom.commands.add 'atom-text-editor', 'encrypt-decrypt:decrypt-des': => @decryptdes()
-    ### Set event on "Go" button ###
-    submit = @secretKeyView.getSubmit()
-    submit.addEventListener "click", (e) => @submitKey()
+    ### Set event on Form Submit ###
+    form = @secretKeyView.getForm()
+    form.addEventListener "submit", (e) => @submitKey()
 
     ### HASH ###
     atom.commands.add 'atom-text-editor', 'encrypt-decrypt:encrypt-md5': => @encryptmd5()
