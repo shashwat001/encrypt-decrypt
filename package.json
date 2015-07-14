@@ -1,7 +1,7 @@
 {
   "name": "encrypt-decrypt",
   "main": "./lib/encrypt-decrypt",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Encrypt and decrypt strings easily and others functionalities.",
   "keywords": [
     "encryption",
