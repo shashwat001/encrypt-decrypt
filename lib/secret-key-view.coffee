@@ -17,6 +17,7 @@ class SecretKeyView
     @form = document.createElement('form')
 
     @input = document.createElement('input')
+    @input.classList.add('native-key-bindings')
     @input.type = "text"
     @input.size='35'
     @input.placeholder = "Encryption/Decryption Key"
