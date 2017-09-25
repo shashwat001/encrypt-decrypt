@@ -37,12 +37,12 @@
       "encrypt-decrypt:encrypt-sha256"
     ]
   },
-  "repository": "https://github.com/lucbu/encrypt-decrypt",
+  "repository": "https://github.com/shashwat001/encrypt-decrypt",
   "license": "MIT",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
   },
   "dependencies": {
-    "cryptojs-atom": "^2.5.3"
+    "crypto-js": "^3.1.8"
   }
 }
